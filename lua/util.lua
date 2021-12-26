@@ -43,4 +43,12 @@ M.get_angle2A = function(x, y)
     return math.atan(y, x) * rad2deg
 end
 
+function M.lerp_angle(a1, a2, p)
+	if p > 1 then
+		p = 1
+	end
+
+	return a1 + ((a2 - a1 + 180) % 360 - 180) * p
+end
+
 return M

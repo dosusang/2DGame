@@ -1,5 +1,6 @@
 ﻿using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class BasicDirObj : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class BasicDirObj : MonoBehaviour
     
     [Range(0,360)]
     public float MoveDir = 0;
+
+    public float Dir;
 
     public int idx = 0;
     
@@ -18,7 +21,9 @@ public class BasicDirObj : MonoBehaviour
 
     void Update()
     {
-        idx = (int)((MoveDir + 22.5f) / 45% Sprites.Length);
+        MoveDir = (MoveDir + 360) % 360;
+        
+        idx = (int)((Dir + 180 + 22.5) / 45 % Sprites.Length);
         mSpriterenderer.sprite = Sprites[idx >= Sprites.Length ? 0 : idx % Sprites.Length];
     }
 }

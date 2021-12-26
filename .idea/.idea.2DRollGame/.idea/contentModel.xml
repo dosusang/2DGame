@@ -25,6 +25,11 @@
             <e p="ResLoader.cs" t="Include" />
             <e p="ResourceDictionary.cs" t="Include" />
           </e>
+          <e p="Script" t="Include">
+            <e p="BasicDirObj.cs" t="Include" />
+            <e p="BasicSpriteAnimation.cs" t="Include" />
+            <e p="TestScript.cs" t="Include" />
+          </e>
           <e p="Xlua" t="Include">
             <e p="ComponentExtentions.cs" t="Include" />
             <e p="GameMain.cs" t="Include" />

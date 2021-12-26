@@ -48,6 +48,7 @@ MonoBehaviour:
     - explotion.prefab
     - HeroCar.prefab
     - New Palette.prefab
+    - HeroCar 1.prefab
     valueData:
     - Assets/Product/Prefab/BasicBall.prefab
     - Assets/Product/Prefab/BasicGround.prefab
@@ -83,3 +84,4 @@ MonoBehaviour:
     - Assets/Product/Prefab/explotion.prefab
     - Assets/Product/Prefab/HeroCar.prefab
     - Assets/Product/New Palette.prefab
+    - Assets/Product/Prefab/HeroCar 1.prefab

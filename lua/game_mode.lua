@@ -4,7 +4,7 @@ local ground_ball_name = "BasicGround"
 local player_car_name = "HeroCar"
 
 
-local HeroClass = require("objs.player_car")
+local HeroClass = require("objs.entitys.player")
 
 local hero
 
