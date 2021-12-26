@@ -37,7 +37,8 @@ class MyAllPostprocessor : AssetPostprocessor
                 ResourceDictionary.Instance.delete(preafabName);
             }
         }
-
+        
+        ResourceDictionary.Instance.ClearEpt();
     }
     static string GetName(string path)
     {

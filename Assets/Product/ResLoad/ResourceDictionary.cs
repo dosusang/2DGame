@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [System.Serializable]
@@ -39,28 +41,6 @@ public class ResourceDictionary : ScriptableObject
         ResourceDictionary._instance = instance;
     }
 
-    //public static void LoadAssetBundelResMap()
-    //{
-    //    UnLoadAssetBundelResMap();
-
-    //    string path = "Assets/Product/Common/ResourceConfig.asset";
-    //    _ResourcBundle = ResLoader.GetRunAssetBundle(path);
-    //    if (_ResourcBundle)
-    //    {
-    //        _instance = _ResourcBundle.LoadAsset<ResourceDictionary>(path);
-    //    }
-    //}
-
-    //public static void UnLoadAssetBundelResMap()
-    //{
-    //    if (_ResourcBundle != null)
-    //    {
-    //        _ResourcBundle.Unload(true);
-    //        _ResourcBundle = null;
-    //    }
-    //}
-
-
     public void add(string key, string value)
     {
         string v;
@@ -93,6 +73,23 @@ public class ResourceDictionary : ScriptableObject
     public void delete(string key)
     {
         ResMap.Remove(key);
+    }
+
+    public void ClearEpt()
+    {
+        var list = new List<String>();
+        foreach (var k in ResMap.Keys)
+        {
+            if (AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(get(k)) == null)
+            {
+                list.Add(k);
+            }
+        }
+
+        foreach (var k in list)
+        {
+            delete(k);
+        }
     }
 }
 

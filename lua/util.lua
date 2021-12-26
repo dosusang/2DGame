@@ -51,4 +51,12 @@ function M.lerp_angle(a1, a2, p)
 	return a1 + ((a2 - a1 + 180) % 360 - 180) * p
 end
 
+function M.lerp(x, y, t)
+    return x + t * (y - x)
+end
+
+function M.load_prefab(name)
+    return ResLoader.LoadRes(Path.GetPath(name .. ".prefab"), typeof(UnityGameObject))
+end
+
 return M
