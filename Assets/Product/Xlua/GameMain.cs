@@ -16,8 +16,12 @@ public class GameMain : MonoBehaviour
     [CSharpCallLua]
     public delegate void LuaFuncVoid();
     
+    [CSharpCallLua]
+    public delegate void CollideFunc(GameObject a, GameObject b);
+    
     LuaFuncFloat _update;
     LuaFuncVoid _fixedUpdate;
+    private CollideFunc _on_collide;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +38,9 @@ public class GameMain : MonoBehaviour
 
         _update = main.Get<LuaFuncFloat>("update");
         _fixedUpdate = main.Get<LuaFuncVoid>("fixed_update");
+        _on_collide = main.Get<CollideFunc>("on_collide");
+            
+        GameMgr.Instance.GameMain = this;
     }
 
     // Update is called once per frame
@@ -45,6 +52,11 @@ public class GameMain : MonoBehaviour
     private void FixedUpdate()
     {
         _fixedUpdate();
+    }
+
+    public void OnCollide(GameObject a, GameObject b)
+    {
+        _on_collide(a, b);
     }
 
     void test()

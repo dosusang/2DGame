@@ -1,10 +1,17 @@
 local M = Util.create_class()
 
-function M:_init(name, obj)
-    self.name = name
-    self.transform = obj.transform
-    self.gameobj = obj
+function M:_init(obj_cfg)
+    self.cfg = obj_cfg
 
+    local hero_res = Util.load_prefab(obj_cfg.res_path)
+    local hero_obj = UnityGameObject.Instantiate(hero_res)
+
+    self.name = obj_cfg.name
+    hero_obj.name = self.name
+    self.transform = hero_obj.transform
+    self.gameobj = hero_obj
+
+    self.transform.position = {x = 0, y =  0, z = -1}
     self.components = {}
 end
 
@@ -24,19 +31,22 @@ function M:on_fixed_update()
     end
 end
 
-function M:add_component(path, name, ...)
-    local component = require(path):new(self, ...)
+function M:add_component(class, name, ...)
+    local component = class:new(self, ...)
     self.components[name] = component
     self[name] = component
 end
 
 function M:on_destory()
     for name, component in pairs(self.components) do
-        component:on_destory()
+        if component.on_destory then
+            component:on_destory() 
+        end
         self[name] = nil
         self.components[name] = nil
     end
 
+    UnityGameObject.Destroy(self.gameobj)
     self.transform = nil
 end
 

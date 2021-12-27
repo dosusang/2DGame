@@ -32,6 +32,10 @@ M.get_dir_obj = function (gameobj)
     return gameobj:GetComponent(typeof(UnityDirObj))
 end
 
+M.get_4_dir_obj = function (gameobj)
+    return gameobj:GetComponent(typeof(Unity4DirObj))
+end
+
 M.get_angle2A = function(x, y)
     if x == 0 and y == 0 then
         return 

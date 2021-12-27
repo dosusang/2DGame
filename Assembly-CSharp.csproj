@@ -54,8 +54,11 @@
      <Compile Include="Assets\Product\ResLoad\PathFinder.cs" />
      <Compile Include="Assets\Product\ResLoad\ResLoader.cs" />
      <Compile Include="Assets\Product\ResLoad\ResourceDictionary.cs" />
+     <Compile Include="Assets\Product\Script\Basic4Dir.cs" />
      <Compile Include="Assets\Product\Script\BasicDirObj.cs" />
      <Compile Include="Assets\Product\Script\BasicSpriteAnimation.cs" />
+     <Compile Include="Assets\Product\Script\CharUtil.cs" />
+     <Compile Include="Assets\Product\Script\GameMgr.cs" />
      <Compile Include="Assets\Product\Script\TestScript.cs" />
      <Compile Include="Assets\Product\Xlua\ComponentExtentions.cs" />
      <Compile Include="Assets\Product\Xlua\GameMain.cs" />

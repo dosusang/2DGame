@@ -21,11 +21,17 @@ MonoBehaviour:
     - HeroCar.prefab
     - New Palette.prefab
     - Missile.prefab
+    - Tank.prefab
+    - Man.prefab
+    - MissileArrow.prefab
     valueData:
     - Assets/Product/Prefab/BasicBall.prefab
     - Assets/Product/Prefab/BasicGround.prefab
     - Packages/com.unity.polybrush/Tests/Templates/PolyEditorUtilityTests/TestGameObject.prefab
     - Assets/Product/Prefab/explotion.prefab
-    - Assets/Product/Prefab/HeroCar.prefab
+    - Assets/Product/Prefab/Entitys/HeroCar.prefab
     - Assets/Product/New Palette.prefab
     - Assets/Product/Prefab/Missile.prefab
+    - Assets/Product/Prefab/Entitys/Tank.prefab
+    - Assets/Product/Prefab/Entitys/Man.prefab
+    - Assets/Product/Prefab/MissileArrow.prefab

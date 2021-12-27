@@ -6,18 +6,19 @@ local rad2deg = math.deg(1)
 local HALF_PI = math.pi / 2
 local TIME = CS.UnityEngine.Time
 
-function M:_init(entity) 
+function M:_init(entity, gun_cfg) 
     self.entity = entity
 
     -- cfgs
-    self.key = KeyCode.Space
-    local missile_gameobj = Util.load_prefab("Missile")
-    self.v_max_count = 3
-    self.v_missile_speed = 6
-    self.v_last_shoot_time = 0
-    self.v_shoot_cd = 0.05
-    self.v_max_live_time = 0.5
+    self.key = gun_cfg.keycode or KeyCode.Space
+    self.v_max_count = gun_cfg.max or 3
+    self.v_missile_speed = gun_cfg.speed or 6
+    self.v_shoot_cd = gun_cfg.shoot_cd or 0.05
+    self.v_max_live_time = gun_cfg.live_time or 0.5
+    self.lock_gun = gun_cfg.lock_gun
 
+    self.v_last_shoot_time = 0
+    local missile_gameobj = Util.load_prefab(gun_cfg.path or "Missile")
     self.v_missiles = {}
     for i = 1, self.v_max_count do
         local missile = {}
@@ -41,8 +42,10 @@ function M:shoot()
         if not missile.shouted then
             missile.gameobj:SetActive(true)
             missile.transform.position = self.entity.transform.position
+            missile.transform.rotation = Quaternion.Euler(0, 0, self.entity:get_face_deg())
             missile.live_time = 0
             missile.shouted = true
+            missile.dirx, missile.diry = self.entity:get_face_vec2()
 
             self.v_last_shoot_time = TIME.time
             break
@@ -57,7 +60,12 @@ function M:on_update(dt)
         if missile.shouted then
             -- update missile
             local pos = missile.transform.position
-            pos.y = pos.y + self.v_missile_speed * 0.016
+            if self.lock_gun then
+                pos.y = pos.y + self.v_missile_speed * 0.016
+            else
+                pos.y = pos.y + self.v_missile_speed * 0.016 * missile.diry
+                pos.x = pos.x + self.v_missile_speed * 0.016 * missile.dirx
+            end
             missile.transform.position = pos
 
             missile.live_time = missile.live_time + 0.016
