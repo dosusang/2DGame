@@ -17,11 +17,11 @@ local man_cfg = {
     gun = {
         lock_gun = false,
         keycode = KeyCode.Space,
-        max = 10,
+        max = 20,
         speed = 10,
-        shoot_cd = 0.05,
+        shoot_cd = 0.02,
         live_time = 1,
-        path = "MissileArrow"
+        path = "Tank"
     }
 }
 
@@ -49,7 +49,7 @@ end
 
 function M:delete_gameobj(gameobj)
     UnityGameObject.Destroy(gameobj)
-    self.cid2obj[obj:GetInstanceID()] = nil
+    self.cid2obj[gameobj:GetInstanceID()] = nil
 end
 
 function M:_init()

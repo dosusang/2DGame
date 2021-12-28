@@ -53,7 +53,7 @@ function M:set_pos(x, y)
     self.transform.position = {x = x, y = y}
 end
 
-function M:get_pos()
+function M:get_pos2()
     local pos = self.transform.position
     return pos.x, pos.y
 end

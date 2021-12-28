@@ -48,14 +48,20 @@ function M:shoot()
             missile.shouted = true
 
             -- cfg
-            missile.move_type = 1
+            missile.move_type = 2
 
             local move_params = {}
             missile.move_params = move_params
             if missile.move_type == 1 then
                 move_params.move_x, move_params.move_y = self.entity:get_face_vec2()
             elseif missile.move_type == 2 then
-                move_params.p0, move_params.p1 = self.entity:get_pos2()
+                move_params.x0, move_params.y0 = self.entity:get_pos2()
+
+                move_params.x1 = move_params.x0 + math.random(-5, 5)
+                move_params.y1 = move_params.y0
+
+                move_params.x2 = move_params.x0
+                move_params.y2 = move_params.y0 + 10
             end
 
 
@@ -70,17 +76,28 @@ function M:on_update(dt)
 
     for _, missile in pairs(self.v_missiles) do
         if missile.shouted then
+            missile.live_time = missile.live_time + 0.016
+
             -- update missile
             local pos = missile.transform.position
-            if self.lock_gun then
-                pos.y = pos.y + self.v_missile_speed * 0.016
-            else
-                pos.y = pos.y + self.v_missile_speed * 0.016 * missile.diry
-                pos.x = pos.x + self.v_missile_speed * 0.016 * missile.dirx
-            end
-            missile.transform.position = pos
 
-            missile.live_time = missile.live_time + 0.016
+            if missile.move_type == 1 then
+
+                if self.lock_gun then
+                    pos.y = pos.y + self.v_missile_speed * 0.016
+                else
+                    local params = missile.move_params
+                    pos.y = pos.y + self.v_missile_speed * 0.016 * params.move_y
+                    pos.x = pos.x + self.v_missile_speed * 0.016 * params.move_x
+                end
+                missile.transform.position = pos
+                
+            elseif missile.move_type == 2 then
+                local params = missile.move_params
+                Log.Info(params)
+                pos.x, pos.y = Util.bezier(params.x0, params.y0, params.x1, params.y1, params.x2, params.y2, missile.live_time / self.v_max_live_time)
+                missile.transform.position = pos
+            end
 
             -- stop missile
             if missile.live_time >= self.v_max_live_time then
