@@ -15,23 +15,25 @@ MonoBehaviour:
   ResMap:
     keyData:
     - BasicBall.prefab
-    - BasicGround.prefab
-    - TestGameObject.prefab
-    - explotion.prefab
-    - HeroCar.prefab
-    - New Palette.prefab
-    - Missile.prefab
-    - Tank.prefab
     - Man.prefab
+    - HeroCar.prefab
+    - AlertBox.prefab
+    - BasicGround.prefab
     - MissileArrow.prefab
+    - Tank.prefab
+    - Missile.prefab
+    - ConfirmBox.prefab
+    - explotion.prefab
+    - New Palette.prefab
     valueData:
     - Assets/Product/Prefab/BasicBall.prefab
-    - Assets/Product/Prefab/BasicGround.prefab
-    - Packages/com.unity.polybrush/Tests/Templates/PolyEditorUtilityTests/TestGameObject.prefab
-    - Assets/Product/Prefab/explotion.prefab
-    - Assets/Product/Prefab/Entitys/HeroCar.prefab
-    - Assets/Product/New Palette.prefab
-    - Assets/Product/Prefab/Missile.prefab
-    - Assets/Product/Prefab/Entitys/Tank.prefab
     - Assets/Product/Prefab/Entitys/Man.prefab
+    - Assets/Product/Prefab/Entitys/HeroCar.prefab
+    - Assets/XLua/Examples/07_AsyncTest/Resources/AlertBox.prefab
+    - Assets/Product/Prefab/BasicGround.prefab
     - Assets/Product/Prefab/MissileArrow.prefab
+    - Assets/Product/Prefab/Entitys/Tank.prefab
+    - Assets/Product/Prefab/Missile.prefab
+    - Assets/XLua/Examples/07_AsyncTest/Resources/ConfirmBox.prefab
+    - Assets/Product/Prefab/explotion.prefab
+    - Assets/Product/New Palette.prefab

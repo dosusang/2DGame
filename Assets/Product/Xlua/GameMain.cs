@@ -17,7 +17,7 @@ public class GameMain : MonoBehaviour
     public delegate void LuaFuncVoid();
     
     [CSharpCallLua]
-    public delegate void CollideFunc(GameObject a, GameObject b);
+    public delegate void CollideFunc(int a, int b);
     
     LuaFuncFloat _update;
     LuaFuncVoid _fixedUpdate;
@@ -54,7 +54,7 @@ public class GameMain : MonoBehaviour
         _fixedUpdate();
     }
 
-    public void OnCollide(GameObject a, GameObject b)
+    public void OnCollide(int a, int b)
     {
         _on_collide(a, b);
     }

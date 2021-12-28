@@ -63,4 +63,14 @@ function M.load_prefab(name)
     return ResLoader.LoadRes(Path.GetPath(name .. ".prefab"), typeof(UnityGameObject))
 end
 
+function M.bezier(x0, y0, x1, y1, x2, y2, t)
+    local one_sub_t = 1 - t
+
+    local p0 = one_sub_t * one_sub_t 
+    local p1 = 2 * t * one_sub_t
+    local p2 = t * t
+
+    return p0 * x0 + p1 * x1 +  p2 * x2, p0 * y0 + p1 * y1 +  p2 * y2
+end
+
 return M

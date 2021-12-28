@@ -18,11 +18,12 @@ function M:_init(entity, gun_cfg)
     self.lock_gun = gun_cfg.lock_gun
 
     self.v_last_shoot_time = 0
-    local missile_gameobj = Util.load_prefab(gun_cfg.path or "Missile")
+
+    local path = gun_cfg.path or "Missile"
     self.v_missiles = {}
     for i = 1, self.v_max_count do
         local missile = {}
-        missile.gameobj = UnityGameObject.Instantiate(missile_gameobj)
+        missile.gameobj = SceneMgr:load_prefab(path)
         self.v_missiles[i] = missile
 
         missile.transform = missile.gameobj.transform
@@ -45,7 +46,18 @@ function M:shoot()
             missile.transform.rotation = Quaternion.Euler(0, 0, self.entity:get_face_deg())
             missile.live_time = 0
             missile.shouted = true
-            missile.dirx, missile.diry = self.entity:get_face_vec2()
+
+            -- cfg
+            missile.move_type = 1
+
+            local move_params = {}
+            missile.move_params = move_params
+            if missile.move_type == 1 then
+                move_params.move_x, move_params.move_y = self.entity:get_face_vec2()
+            elseif missile.move_type == 2 then
+                move_params.p0, move_params.p1 = self.entity:get_pos2()
+            end
+
 
             self.v_last_shoot_time = TIME.time
             break
@@ -81,6 +93,12 @@ end
 
 function M:on_fixed_update()
 
+end
+
+function M:on_destory()
+    for _, missile in pairs(self.v_missiles) do
+        UnityGameObject.Destroy(missile.gameobj)
+    end
 end
 
 return M

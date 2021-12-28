@@ -3,8 +3,7 @@ local M = Util.create_class()
 function M:_init(obj_cfg)
     self.cfg = obj_cfg
 
-    local hero_res = Util.load_prefab(obj_cfg.res_path)
-    local hero_obj = UnityGameObject.Instantiate(hero_res)
+    local hero_obj = SceneMgr:load_prefab(obj_cfg.res_path)
 
     self.name = obj_cfg.name
     hero_obj.name = self.name
@@ -48,6 +47,15 @@ function M:on_destory()
 
     UnityGameObject.Destroy(self.gameobj)
     self.transform = nil
+end
+
+function M:set_pos(x, y)
+    self.transform.position = {x = x, y = y}
+end
+
+function M:get_pos()
+    local pos = self.transform.position
+    return pos.x, pos.y
 end
 
 return M
