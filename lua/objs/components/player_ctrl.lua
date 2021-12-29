@@ -3,15 +3,15 @@ local Input = CS.UnityEngine.Input
 local KeyCode = CS.UnityEngine.KeyCode
 local deg2rad = math.rad(1)
 
-function M:_init(name, obj) 
-    self.v_name = name
-    self.v_gameobj = obj
-    self.transform = obj.transform
+function M:_init(entity) 
+    self.v_gameobj = entity.gameobj
+    self.transform = self.v_gameobj.transform
 
     self.v_cam = UnityGameObject.Find("Main Camera")
-    self.v_dir_obj = Util.get_dir_obj(obj)
+    self.v_dir_obj = Util.get_4_dir_obj(self.v_gameobj) or Util.get_dir_obj(self.v_gameobj)
 
-    self.v_rb = Util.get_rb(obj)
+
+    self.v_rb = Util.get_rb(self.v_gameobj)
     self.v_rb.gravityScale = 0
 
     -- 移动方向
@@ -81,7 +81,7 @@ function M:on_fixed_update()
     local deg = self.v_move_dir + 90
     pos.x = pos.x + self.v_speed * math.cos(deg * deg2rad) * 0.02
     pos.y = pos.y + self.v_speed * math.sin(deg * deg2rad) * 0.02
-    self.v_dir_obj.MoveDir = self.v_move_dir
+    self.v_dir_obj.Dir = self.v_move_dir + 180
     self.transform.position = pos
 end
 

@@ -6,28 +6,33 @@ local rad2deg = math.deg(1)
 local HALF_PI = math.pi / 2
 local TIME = CS.UnityEngine.Time
 
+function M.stop_missile(missile)
+    missile.shouted = false
+    missile.gameobj:SetActive(false)
+end
+
 function M:_init(entity, gun_cfg) 
     self.entity = entity
 
     -- cfgs
     self.key = gun_cfg.keycode or KeyCode.Space
     self.v_max_count = gun_cfg.max or 3
-    self.v_missile_speed = gun_cfg.speed or 6
     self.v_shoot_cd = gun_cfg.shoot_cd or 0.05
-    self.v_max_live_time = gun_cfg.live_time or 0.5
-    self.lock_gun = gun_cfg.lock_gun
 
     self.v_last_shoot_time = 0
 
-    local path = gun_cfg.path or "Missile"
+    local missile_cfg = {
+        name = "子弹",
+        res_path = gun_cfg.path or "Missile",
+        speed = gun_cfg.speed or 6,
+        lock_dir = gun_cfg.lock_gun,
+        max_live_time = 1,
+        move_type = 1
+    }
+
     self.v_missiles = {}
     for i = 1, self.v_max_count do
-        local missile = {}
-        missile.gameobj = SceneMgr:load_prefab(path)
-        self.v_missiles[i] = missile
-
-        missile.transform = missile.gameobj.transform
-        missile.gameobj:SetActive(false)
+        self.v_missiles[i] = require("objs.entitys.missile"):new(missile_cfg, self.entity)
     end
 end
 
@@ -41,30 +46,7 @@ function M:shoot()
     for i = 1, self.v_max_count do
         local missile = self.v_missiles[i]
         if not missile.shouted then
-            missile.gameobj:SetActive(true)
-            missile.transform.position = self.entity.transform.position
-            missile.transform.rotation = Quaternion.Euler(0, 0, self.entity:get_face_deg())
-            missile.live_time = 0
-            missile.shouted = true
-
-            -- cfg
-            missile.move_type = 2
-
-            local move_params = {}
-            missile.move_params = move_params
-            if missile.move_type == 1 then
-                move_params.move_x, move_params.move_y = self.entity:get_face_vec2()
-            elseif missile.move_type == 2 then
-                move_params.x0, move_params.y0 = self.entity:get_pos2()
-
-                move_params.x1 = move_params.x0 + math.random(-5, 5)
-                move_params.y1 = move_params.y0
-
-                move_params.x2 = move_params.x0
-                move_params.y2 = move_params.y0 + 10
-            end
-
-
+            missile:on_shot()
             self.v_last_shoot_time = TIME.time
             break
         end
@@ -75,36 +57,7 @@ function M:on_update(dt)
     self:get_input()
 
     for _, missile in pairs(self.v_missiles) do
-        if missile.shouted then
-            missile.live_time = missile.live_time + 0.016
-
-            -- update missile
-            local pos = missile.transform.position
-
-            if missile.move_type == 1 then
-
-                if self.lock_gun then
-                    pos.y = pos.y + self.v_missile_speed * 0.016
-                else
-                    local params = missile.move_params
-                    pos.y = pos.y + self.v_missile_speed * 0.016 * params.move_y
-                    pos.x = pos.x + self.v_missile_speed * 0.016 * params.move_x
-                end
-                missile.transform.position = pos
-                
-            elseif missile.move_type == 2 then
-                local params = missile.move_params
-                Log.Info(params)
-                pos.x, pos.y = Util.bezier(params.x0, params.y0, params.x1, params.y1, params.x2, params.y2, missile.live_time / self.v_max_live_time)
-                missile.transform.position = pos
-            end
-
-            -- stop missile
-            if missile.live_time >= self.v_max_live_time then
-                missile.shouted = false
-                missile.gameobj:SetActive(false)
-            end
-        end
+        missile:on_update(dt)
     end
 end
 
@@ -113,8 +66,9 @@ function M:on_fixed_update()
 end
 
 function M:on_destory()
-    for _, missile in pairs(self.v_missiles) do
-        UnityGameObject.Destroy(missile.gameobj)
+    for k, missile in pairs(self.v_missiles) do
+        SceneMgr:delete_obj(missile)
+        self.v_missiles[k] = nil
     end
 end
 

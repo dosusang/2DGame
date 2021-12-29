@@ -2,9 +2,9 @@ local Base = require("objs.entitys.base_obj")
 local M = Util.extend_class(Base)
 
 function M:_init(cfg)
-    Base:_init(cfg)
+    Base._init(self, cfg)
 
-    self:add_component(require("objs.components.player_ctrl_justgo"), "ctrler")
+    self:add_component(require("objs.components.player_ctrl"), "ctrler")
 
     if cfg.gun then
         self:add_component(require("objs.components.gun"), "gun", cfg.gun)

@@ -3,12 +3,12 @@ local M = Util.create_class()
 function M:_init(obj_cfg)
     self.cfg = obj_cfg
 
-    local hero_obj = SceneMgr:load_prefab(obj_cfg.res_path)
+    local obj = SceneMgr:load_obj(obj_cfg.res_path, self)
 
-    self.name = obj_cfg.name
-    hero_obj.name = self.name
-    self.transform = hero_obj.transform
-    self.gameobj = hero_obj
+    self.name = obj_cfg.name or "No Name Obj"
+    obj.name = self.name
+    self.transform = obj.transform
+    self.gameobj = obj
 
     self.transform.position = {x = 0, y =  0, z = -1}
     self.components = {}
