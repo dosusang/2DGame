@@ -4,8 +4,8 @@ local M = Util.extend_class(Base)
 function M:_init(cfg)
     Base._init(self, cfg)
 
-    self:add_component(require("objs.components.player_ctrl"), "ctrler")
-
+    self:add_component(require("objs.components.player_ctrl_justgo"), "ctrler")
+    self:add_component(require("objs.components.effect_mgr"), "effect_mgr")
     if cfg.gun then
         self:add_component(require("objs.components.gun"), "gun", cfg.gun)
     end

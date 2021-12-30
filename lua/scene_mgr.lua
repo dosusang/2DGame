@@ -17,7 +17,7 @@ local man_cfg = {
         keycode = KeyCode.Space,
         max = 20,
         speed = 10,
-        shoot_cd = 0.02,
+        shoot_cd = 0.01,
         live_time = 1,
         path = "MissileArrow"
     }
@@ -57,7 +57,7 @@ end
 
 function M:game_start()
     Global.hero = self:create_hero()
-
+    Global.hero:set_pos(0, 0)
     for i = 1, 5 do
         local tank = self:create_tank()        
         tank:set_pos(i, 4)
@@ -69,8 +69,17 @@ function M:clear()
     Global.hero = nil
 end
 
+local CD = 0.1
+local timer = 0
+
 function M:update()
     Global.hero:on_update(TIME.deltaTime)
+    timer = timer + TIME.deltaTime
+    if timer > CD then
+        timer = 0
+        local tank = self:create_tank()
+        tank:set_pos(math.random(-5,5), math.random(-5,5))
+    end
 end
 
 function M:fixed_update()

@@ -73,4 +73,8 @@ function M.bezier(x0, y0, x1, y1, x2, y2, t)
     return p0 * x0 + p1 * x1 +  p2 * x2, p0 * y0 + p1 * y1 +  p2 * y2
 end
 
+function M.set_pos(gameobj, x, y)
+    gameobj.transform.position = {x = x, y = y, z = -1}    
+end
+
 return M

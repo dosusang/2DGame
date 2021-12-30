@@ -81,17 +81,27 @@ function M:on_update(dt)
     MISSILE_ON_UPDATE[self.move_type](self, dt)
     -- stop missile
     if self.live_time >= self.max_live_time then
-        self.shouted = false
-        self.gameobj:SetActive(false)
+        self:stop()
     end
 end
 
+function M:stop()
+    self.shouted = false
+    self.gameobj:SetActive(false)
+end
+
 function M:is_missile()
+
 end
 
 function M:attack(obj)
     --test
     if obj ~= self.shoter and not obj.is_missile then
+        self:stop()
+
+        -- obj:on_die()
+        local pos = obj.transform.position
+        self.shoter.effect_mgr:show_effect("Explotion", pos.x, pos.y)
         SceneMgr:delete_obj(obj)
     end
 end

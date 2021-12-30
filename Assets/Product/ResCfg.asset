@@ -25,6 +25,7 @@ MonoBehaviour:
     - ConfirmBox.prefab
     - explotion.prefab
     - New Palette.prefab
+    - Explotion.prefab
     valueData:
     - Assets/Product/Prefab/BasicBall.prefab
     - Assets/Product/Prefab/Entitys/Man.prefab
@@ -37,3 +38,4 @@ MonoBehaviour:
     - Assets/XLua/Examples/07_AsyncTest/Resources/ConfirmBox.prefab
     - Assets/Product/Prefab/explotion.prefab
     - Assets/Product/New Palette.prefab
+    - Assets/Product/Prefab/Explotion.prefab
