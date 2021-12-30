@@ -5,14 +5,12 @@ local tank_cfg = {
     res_path = "Tank",
     speed = 4,
     dirs = 4,
-    
 }
 
 local man_cfg = {
-    name = "小人",
-    res_path = "Man",
+    name = "坦克",
+    res_path = "Tank",
     speed = 4,
-    dirs = 4,
 
     gun = {
         lock_gun = false,
@@ -21,11 +19,9 @@ local man_cfg = {
         speed = 10,
         shoot_cd = 0.02,
         live_time = 1,
-        path = "Tank"
+        path = "MissileArrow"
     }
 }
-
-
 
 function M:create_hero()
     return require("objs.entitys.basic_move&shot"):new(man_cfg)
@@ -35,21 +31,24 @@ function M:create_tank()
     return require("objs.entitys.base_obj"):new(tank_cfg)
 end
 
-function M:load_prefab(path)
-    local hero_res = Util.load_prefab(path)
-    if not hero_res then
+function M:load_obj(path, luaobj)
+    if not path then
+        Log.Error("obj path is nil", debug.traceback())
+    end
+    local res = Util.load_prefab(path)
+    if not res then
         Log.Error(path .. "资源不存在", debug.traceback())
         return
     end
 
-    local obj = UnityGameObject.Instantiate(hero_res)
-    self.cid2obj[obj:GetInstanceID()] = obj;
+    local obj = UnityGameObject.Instantiate(res)
+    self.cid2obj[obj:GetInstanceID()] = luaobj;
     return obj
 end
 
-function M:delete_gameobj(gameobj)
-    UnityGameObject.Destroy(gameobj)
-    self.cid2obj[gameobj:GetInstanceID()] = nil
+function M:delete_obj(obj)
+    self.cid2obj[obj.gameobj:GetInstanceID()] = nil
+    obj:on_destory()
 end
 
 function M:_init()
@@ -71,15 +70,22 @@ function M:clear()
 end
 
 function M:update()
-    Global.hero:on_update()
+    Global.hero:on_update(TIME.deltaTime)
 end
 
 function M:fixed_update()
     Global.hero:on_fixed_update()
 end
 
-function M:on_collide(a, b)
-    
+function M:on_collide(a_cid, b_cid)
+    local missile = self.cid2obj[a_cid]
+
+    if not missile or not missile.is_missile then return end
+
+    local other = self.cid2obj[b_cid]
+    if not other then return end
+
+    missile:attack(other)
 end
 
 return M

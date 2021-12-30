@@ -11,11 +11,11 @@ function M:_init(entity)
     self.transform = self.v_gameobj.transform
 
     self.v_cam = UnityGameObject.Find("Main Camera")
-    if entity.cfg.dirs == 4 then
-        self.v_dir_obj = Util.get_4_dir_obj(self.v_gameobj)
-    else
-        self.v_dir_obj = Util.get_dir_obj(self.v_gameobj)
-    end
+    -- if entity.cfg.dirs == 4 then
+    self.v_dir_obj = Util.get_4_dir_obj(self.v_gameobj) or  Util.get_dir_obj(self.v_gameobj)
+    -- else
+        -- self.v_dir_obj = Util.get_dir_obj(self.v_gameobj)
+    -- end
 
     self.v_rb = Util.get_rb(self.v_gameobj)
     self.v_rb.gravityScale = 0
@@ -83,7 +83,6 @@ function M:move()
 end
 
 function M:on_update()
-
     self:get_input()
     self:move()
 end
