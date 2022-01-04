@@ -55,8 +55,22 @@ function M.lerp_angle(a1, a2, p)
 	return a1 + ((a2 - a1 + 180) % 360 - 180) * p
 end
 
+function M.lerp_rad(a1, a2, p)
+	if p > 1 then
+		p = 1
+	end
+
+	return a1 + ((a2 - a1 + 3.14159) % 6.283 - 3.14159) * p
+end
+
 function M.lerp(x, y, t)
     return x + t * (y - x)
+end
+
+function M.clamp(x, min, max)
+    if x < min then return min end
+    if x < max then return x end
+    return max
 end
 
 function M.load_prefab(name)
@@ -74,7 +88,11 @@ function M.bezier(x0, y0, x1, y1, x2, y2, t)
 end
 
 function M.set_pos(gameobj, x, y)
-    gameobj.transform.position = {x = x, y = y, z = -1}    
+    gameobj.transform.position = {x = x, y = y, z = -1}
+end
+
+function M.set_eulerz(gameobj, z)
+    gameobj.transform.rotation = Quaternion.Euler(0, 0, z)
 end
 
 return M

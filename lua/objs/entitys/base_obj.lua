@@ -12,6 +12,8 @@ function M:_init(obj_cfg)
 
     self.transform.position = {x = 0, y =  0, z = -1}
     self.components = {}
+
+    self.is_destroyed = false
 end
 
 function M:on_update(dt)
@@ -47,15 +49,33 @@ function M:on_destory()
 
     UnityGameObject.Destroy(self.gameobj)
     self.transform = nil
+    self.is_destroyed = true
 end
 
 function M:set_pos(x, y)
-    self.transform.position = {x = x, y = y}
+    Util.set_pos(self.gameobj, x, y)
 end
 
 function M:get_pos2()
     local pos = self.transform.position
     return pos.x, pos.y
+end
+
+function M:get_dist_sqrt(obj)
+    if not obj or obj.is_destroyed then
+        return
+    end
+
+    local x, z = self:get_pos2()
+    local px, pz = obj:get_pos2()
+    return (x - px) * (x - px) + (z - pz) * (z - pz) 
+end
+
+function M:get_faceto_obj_rad(obj)
+    local x, z = self:get_pos2()
+    local px, pz = obj:get_pos2()
+    local tx, tz = px- x, pz - z
+    return math.atan(tz, tx)
 end
 
 return M

@@ -22,10 +22,14 @@ MonoBehaviour:
     - MissileArrow.prefab
     - Tank.prefab
     - Missile.prefab
+    - TestGameObject.prefab
+    - Cube.prefab
     - ConfirmBox.prefab
+    - Default.prefab
     - explotion.prefab
     - New Palette.prefab
-    - Explotion.prefab
+    - BaseGun.prefab
+    - House.prefab
     valueData:
     - Assets/Product/Prefab/BasicBall.prefab
     - Assets/Product/Prefab/Entitys/Man.prefab
@@ -35,7 +39,11 @@ MonoBehaviour:
     - Assets/Product/Prefab/MissileArrow.prefab
     - Assets/Product/Prefab/Entitys/Tank.prefab
     - Assets/Product/Prefab/Missile.prefab
+    - Packages/com.unity.polybrush/Tests/Templates/PolyEditorUtilityTests/TestGameObject.prefab
+    - Packages/com.unity.2d.tilemap/Tests/Prefabs/Cube.prefab
     - Assets/XLua/Examples/07_AsyncTest/Resources/ConfirmBox.prefab
+    - Packages/com.unity.2d.tilemap/Tests/Palettes/Default.prefab
     - Assets/Product/Prefab/explotion.prefab
     - Assets/Product/New Palette.prefab
-    - Assets/Product/Prefab/Explotion.prefab
+    - Assets/Product/Prefab/BaseGun.prefab
+    - Assets/Product/Prefab/House.prefab

@@ -54,6 +54,7 @@ function M:_init(cfg, shoter)
     local collide2d = self.gameobj:GetComponent(typeof(UnityCollider2D))
     collide2d.isTrigger = true
     self.gameobj:SetActive(false)
+    self.transform:SetParent(shoter.transform)
     self.shoter = shoter
     self.move_type = cfg.move_type or 1
     self.move_params = {}
@@ -98,11 +99,14 @@ function M:attack(obj)
     --test
     if obj ~= self.shoter and not obj.is_missile then
         self:stop()
+        
+        if self.shoter.on_missile_hit then
+            self.shoter.on_missile_hit()
+        end
 
-        -- obj:on_die()
-        local pos = obj.transform.position
-        self.shoter.effect_mgr:show_effect("Explotion", pos.x, pos.y)
-        SceneMgr:delete_obj(obj)
+        if obj.on_beattack then
+            obj:on_beattack()
+        end
     end
 end
 

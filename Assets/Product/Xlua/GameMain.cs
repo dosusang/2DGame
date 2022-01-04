@@ -62,5 +62,7 @@ public class GameMain : MonoBehaviour
     void test()
     {
         // GameObject.
+        // transform.Find()
+        // transform.GetChild()
     }
 }

@@ -23,12 +23,41 @@ local man_cfg = {
     }
 }
 
+local house_cfg = {
+    name = "house",
+    res_path = "House",
+}
+
+local base_gun_cfg = {
+    name = "大炮",
+    res_path = "BaseGun",
+    speed = 4,
+
+    gun = {
+        lock_gun = false,
+        keycode = KeyCode.Space,
+        max = 20,
+        speed = 10,
+        shoot_cd = 0.01,
+        live_time = 1,
+        path = "MissileArrow"
+    }
+}
+
 function M:create_hero()
     return require("objs.entitys.basic_move&shot"):new(man_cfg)
 end
 
 function M:create_tank()
     return require("objs.entitys.base_obj"):new(tank_cfg)
+end
+
+function M:create_house()
+    return require("objs.entitys.house"):new(house_cfg)
+end
+
+function M:create_base_gun()
+    return require("objs.entitys.base_gun"):new(base_gun_cfg)
 end
 
 function M:load_obj(path, luaobj)
@@ -58,9 +87,17 @@ end
 function M:game_start()
     Global.hero = self:create_hero()
     Global.hero:set_pos(0, 0)
-    for i = 1, 5 do
-        local tank = self:create_tank()        
-        tank:set_pos(i, 4)
+    self.scene_cam = require("camera"):new()
+
+    self.tanks = {}
+    local base_gun_root = UnityGameObject.Find("BaseGuns")
+    local length = base_gun_root.transform.childCount
+    for i = 0, length-1 do
+        local gun = self:create_base_gun()
+        local pos = base_gun_root.transform:GetChild(i).position
+        gun:set_pos(pos.x, pos.y)
+        UnityGameObject.Destroy(base_gun_root.transform:GetChild(i).gameObject) 
+        self.tanks[i] = gun
     end
 end
 
@@ -73,12 +110,11 @@ local CD = 0.1
 local timer = 0
 
 function M:update()
-    Global.hero:on_update(TIME.deltaTime)
-    timer = timer + TIME.deltaTime
-    if timer > CD then
-        timer = 0
-        local tank = self:create_tank()
-        tank:set_pos(math.random(-5,5), math.random(-5,5))
+    local dt = TIME.deltaTime
+    Global.hero:on_update(dt)
+    self.scene_cam:on_update(dt)
+    for i = 1, #self.tanks do
+        self.tanks[i]:on_update(dt)
     end
 end
 
