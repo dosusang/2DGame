@@ -14,36 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ResMap:
     keyData:
-    - BasicBall.prefab
-    - Man.prefab
-    - HeroCar.prefab
-    - AlertBox.prefab
-    - BasicGround.prefab
+    - House.prefab
     - MissileArrow.prefab
     - Tank.prefab
     - Missile.prefab
-    - TestGameObject.prefab
-    - Cube.prefab
-    - ConfirmBox.prefab
-    - Default.prefab
-    - explotion.prefab
-    - New Palette.prefab
     - BaseGun.prefab
-    - House.prefab
     valueData:
-    - Assets/Product/Prefab/BasicBall.prefab
-    - Assets/Product/Prefab/Entitys/Man.prefab
-    - Assets/Product/Prefab/Entitys/HeroCar.prefab
-    - Assets/XLua/Examples/07_AsyncTest/Resources/AlertBox.prefab
-    - Assets/Product/Prefab/BasicGround.prefab
+    - Assets/Product/Prefab/House.prefab
     - Assets/Product/Prefab/MissileArrow.prefab
     - Assets/Product/Prefab/Entitys/Tank.prefab
     - Assets/Product/Prefab/Missile.prefab
-    - Packages/com.unity.polybrush/Tests/Templates/PolyEditorUtilityTests/TestGameObject.prefab
-    - Packages/com.unity.2d.tilemap/Tests/Prefabs/Cube.prefab
-    - Assets/XLua/Examples/07_AsyncTest/Resources/ConfirmBox.prefab
-    - Packages/com.unity.2d.tilemap/Tests/Palettes/Default.prefab
-    - Assets/Product/Prefab/explotion.prefab
-    - Assets/Product/New Palette.prefab
     - Assets/Product/Prefab/BaseGun.prefab
-    - Assets/Product/Prefab/House.prefab

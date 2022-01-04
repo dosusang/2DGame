@@ -5,6 +5,7 @@ local deg2rad = math.rad(1)
 
 function M:_init(entity) 
     self.v_gameobj = entity.gameobj
+    self.entity = entity
     self.transform = self.v_gameobj.transform
 
     self.v_cam = UnityGameObject.Find("Main Camera")
@@ -56,16 +57,14 @@ function M:get_input()
 end
 
 function M:on_update()
-
     self:get_input()
-    local pos = self.transform.position
-    self.v_cam.transform.position = {x = pos.x, y = pos.y, z = -10}
 end
 
 local lerp = function(x, y, t)
     return x + t * (y - x)
 end
 
+local temp_pos = {}
 function M:on_fixed_update()
     self.v_move_dir = (self.v_move_dir + self.v_trun * 10) % 360
     self.v_move_dir = lerp(self.v_move_dir, 45 * math.floor(self.v_move_dir / 45 + 0.5), 0.12)
@@ -77,12 +76,13 @@ function M:on_fixed_update()
         self.v_speed = self.v_speed + 0.05
     end
 
-    local pos = self.transform.position
+    temp_pos.x, temp_pos.y = self.entity:get_pos2()
+    local pos = temp_pos
     local deg = self.v_move_dir + 90
     pos.x = pos.x + self.v_speed * math.cos(deg * deg2rad) * 0.02
     pos.y = pos.y + self.v_speed * math.sin(deg * deg2rad) * 0.02
     self.v_dir_obj.Dir = self.v_move_dir + 180
-    self.transform.position = pos
+    CompExtention.SetPosA(self.transform, pos.x, pos.y, pos.z)
 end
 
 return M

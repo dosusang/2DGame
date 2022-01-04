@@ -10,9 +10,11 @@ function M:_init(obj_cfg)
     self.transform = obj.transform
     self.gameobj = obj
 
-    self.transform.position = {x = 0, y =  0, z = -1}
     self.components = {}
-
+    self.transform.position = {x = 0, y =  0, z = -1}
+    self.posx, self.posy = 0, 0
+    self.pos = {}
+    self.pos.z = -1
     self.is_destroyed = false
 end
 
@@ -53,12 +55,13 @@ function M:on_destory()
 end
 
 function M:set_pos(x, y)
+    self.posx, self.posy = x, y
+    self.pos.x, self.pos.y = x, y
     Util.set_pos(self.gameobj, x, y)
 end
 
 function M:get_pos2()
-    local pos = self.transform.position
-    return pos.x, pos.y
+    return self.posx, self.posy
 end
 
 function M:get_dist_sqrt(obj)

@@ -6,6 +6,63 @@
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="LuaProfiler" t="Include">
+          <e p="Common" t="Include">
+            <e p="Setting" t="Include">
+              <e p="LuaDeepProfilerAssetSetting.cs" t="Include" />
+              <e p="LuaDeepProfilerSetting.cs" t="Include" />
+              <e p="LuaProfilerPrecompileSetting.cs" t="Include" />
+            </e>
+            <e p="Struct" t="Include">
+              <e p="List.cs" t="Include" />
+              <e p="ObjectPool.cs" t="Include" />
+              <e p="Sample.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Core" t="Include">
+            <e p="Driver" t="Include">
+              <e p="LuaDLL.cs" t="Include" />
+              <e p="LuaProfiler.cs" t="Include" />
+              <e p="NativeHelper.cs" t="Include" />
+              <e p="Parse" t="Include">
+                <e p="Common.cs" t="Include" />
+                <e p="LLex.cs" t="Include" />
+                <e p="Parse.cs" t="Include" />
+                <e p="Util.cs" t="Include" />
+              </e>
+            </e>
+            <e p="LuaHookSetup.cs" t="Include" />
+            <e p="NetWork" t="Include">
+              <e p="NetWorkClient.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Editor" t="Include">
+            <e p="StartUp.cs" t="Include" />
+            <e p="Window" t="Include">
+              <e p="Client" t="Include">
+                <e p="LuaProfilerSettingWindow.cs" t="Include" />
+              </e>
+              <e p="ProfilerWin" t="Include">
+                <e p="LocalToLuaIDE.cs" t="Include" />
+                <e p="NetWork" t="Include">
+                  <e p="NetWorkServer.cs" t="Include" />
+                </e>
+                <e p="Setting" t="Include">
+                  <e p="LuaProfilerPrecompileSettingEditor.cs" t="Include" />
+                </e>
+                <e p="TreeView" t="Include">
+                  <e p="HistoryCurve.cs" t="Include" />
+                  <e p="LuaDiffScrollView.cs" t="Include" />
+                  <e p="LuaProfilerTreeView.cs" t="Include" />
+                  <e p="LuaProfilerWindow.cs" t="Include" />
+                  <e p="LuaRefScrollView.cs" t="Include" />
+                  <e p="SplitterGUILayout.cs" t="Include" />
+                  <e p="SplitterState.cs" t="Include" />
+                </e>
+              </e>
+            </e>
+          </e>
+        </e>
         <e p="Product" t="Include">
           <e p="Editor" t="Include">
             <e p="ResConfig" t="Include">
@@ -20,6 +77,7 @@
             <e p="UnityShader.shader" t="Include" />
           </e>
           <e p="ResLoad" t="Include">
+            <e p="CompExtentions.cs" t="Include" />
             <e p="DictionarySerialized.cs" t="Include" />
             <e p="Editor" t="Include">
               <e p="ResourceDictEditor.cs" t="Include" />

@@ -88,11 +88,11 @@ function M.bezier(x0, y0, x1, y1, x2, y2, t)
 end
 
 function M.set_pos(gameobj, x, y)
-    gameobj.transform.position = {x = x, y = y, z = -1}
+    CompExtention.SetPosA(gameobj, x, y, -1)
 end
 
 function M.set_eulerz(gameobj, z)
-    gameobj.transform.rotation = Quaternion.Euler(0, 0, z)
+    CompExtention.SetEulerZ(gameobj.transform, z)
 end
 
 return M

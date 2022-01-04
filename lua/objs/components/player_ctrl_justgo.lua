@@ -9,7 +9,7 @@ local TIME = CS.UnityEngine.Time
 function M:_init(entity) 
     self.v_gameobj = entity.gameobj
     self.transform = self.v_gameobj.transform
-
+    self.entity = entity
     self.v_cam = UnityGameObject.Find("Main Camera")
     -- if entity.cfg.dirs == 4 then
     self.v_dir_obj = Util.get_4_dir_obj(self.v_gameobj) or  Util.get_dir_obj(self.v_gameobj)
@@ -67,7 +67,7 @@ function M:move()
     self.v_dir_obj.Dir = Util.lerp_angle(cur_show_dir, cur_move_dir, 0.1) % 360
 
     self.v_move_dir_rad = cur_deg * deg2rad
-    local pos = self.transform.position
+    local pos = self.entity.pos
     local rad = self.v_move_dir_rad
     pos.x = pos.x + self.v_speed * math.cos(rad) * dt
     pos.y = pos.y + self.v_speed * math.sin(rad) * dt
@@ -78,8 +78,8 @@ function M:move()
     elseif TIME.frameCount%16 == 8 then
         pos.y = pos.y - 0.03
     end
-  
-    self.transform.position = pos
+    
+    self.entity:set_pos(pos.x, pos.y)
 end
 
 function M:on_update()

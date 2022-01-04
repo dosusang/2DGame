@@ -28,6 +28,7 @@ function main()
     Unity4DirObj = CS.Basic4Dir
     KeyCode = CS.UnityEngine.KeyCode
     Quaternion = CS.UnityEngine.Quaternion
+    CompExtention = CS.CompExtention
 
     Util = require("util")
     Log = require("log")

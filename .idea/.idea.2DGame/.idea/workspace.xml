@@ -11,6 +11,7 @@
     <changedPaths>
       <option value="$PROJECT_DIR$/Assets/Product/Script/CharUtil.cs" />
       <option value="$PROJECT_DIR$/Assets/Product/Xlua/GameMain.cs" />
+      <option value="$PROJECT_DIR$/Assets/Product/ResLoad/CompExtentions.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="22uqylHsUx7dqkBBoXibnnzQTYu" />

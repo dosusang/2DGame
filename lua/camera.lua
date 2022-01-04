@@ -20,7 +20,7 @@ end
 function M:set_cam_pos()
     self.pos_x = Util.clamp(self.pos_x, M.cam_range_x[1], M.cam_range_x[2])
     self.pos_y = Util.clamp(self.pos_y, M.cam_range_y[1], M.cam_range_y[2])
-    self.cam_obj.transform.position = {x = self.pos_x, y = self.pos_y, z = -10}
+    CompExtention.SetPosA(self.cam_obj, self.pos_x, self.pos_y, -10)
 end
 
 return M

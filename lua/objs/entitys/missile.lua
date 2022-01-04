@@ -28,7 +28,7 @@ local MISSILE_ON_SHOT = {
 
 local MISSILE_ON_UPDATE = {
     [MISSILE_MOVE_TYPE.LINE] = function (missile, dt)
-        local pos = missile.transform.position
+        local pos = missile.pos
         if missile.lock_dir then
             pos.y = pos.y + missile.v_missile_speed * dt
         else
@@ -36,14 +36,14 @@ local MISSILE_ON_UPDATE = {
             pos.y = pos.y + missile.v_missile_speed * dt * params.move_y
             pos.x = pos.x + missile.v_missile_speed * dt * params.move_x
         end
-        missile.transform.position = pos
+        CompExtention.SetPosA(missile.transform, pos.x, pos.y, pos.z)
     end,
 
     [MISSILE_MOVE_TYPE.BEZIER] = function (missile, dt)
         local params = missile.move_params
-        local pos = missile.transform.position
+        local pos = missile.pos
         pos.x, pos.y = Util.bezier(params.x0, params.y0, params.x1, params.y1, params.x2, params.y2, missile.live_time / missile.max_live_time)
-        missile.transform.position = pos
+        CompExtention.SetPosA(missile.transform, pos.x, pos.y, pos.z)
     end
 }
 
@@ -64,8 +64,9 @@ end
 
 function M:on_shot()
     self.gameobj:SetActive(true)
-    self.transform.position = self.shoter.transform.position
-    self.transform.rotation = Quaternion.Euler(0, 0, self.shoter:get_face_deg())
+    local pos = self.shoter.pos
+    CompExtention.SetPosA(self.transform, pos.x, pos.y, pos.z)
+    CompExtention.SetEulerZ(self.transform, self.shoter:get_face_deg())
     self.live_time = 0
     self.shouted = true
 
