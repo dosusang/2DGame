@@ -47,4 +47,12 @@ public static class CompExtention
     {
         trans.localScale = new Vector3(scale, scale, scale);
     }
+
+    public static void GetPosA(this Transform trans, ref float x, ref float y, ref float z)
+    {
+        var pos = trans.position;
+        x = pos.x;
+        y = pos.y;
+        z = pos.z;
+    }
 }

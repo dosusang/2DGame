@@ -50,7 +50,8 @@ local MISSILE_ON_UPDATE = {
 function M:_init(cfg, shoter)
     Base._init(self, cfg)
     self.transform = self.gameobj.transform
-
+    self.pos.z = self.pos.z - 1
+    
     local collide2d = self.gameobj:GetComponent(typeof(UnityCollider2D))
     collide2d.isTrigger = true
     self.gameobj:SetActive(false)
@@ -65,7 +66,7 @@ end
 function M:on_shot()
     self.gameobj:SetActive(true)
     local pos = self.shoter.pos
-    CompExtention.SetPosA(self.transform, pos.x, pos.y, pos.z)
+    CompExtention.SetPosA(self.transform, pos.x, pos.y, pos.z - 1)
     CompExtention.SetEulerZ(self.transform, self.shoter:get_face_deg())
     self.live_time = 0
     self.shouted = true

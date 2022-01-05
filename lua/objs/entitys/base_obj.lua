@@ -16,6 +16,11 @@ function M:_init(obj_cfg)
     self.pos = {}
     self.pos.z = -1
     self.is_destroyed = false
+
+    local born_pos = obj_cfg.born_pos
+    if born_pos then
+        self:set_pos(born_pos.x, born_pos.y)
+    end
 end
 
 function M:on_update(dt)

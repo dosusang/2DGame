@@ -68,6 +68,8 @@ function M:move()
 
     self.v_move_dir_rad = cur_deg * deg2rad
     local pos = self.entity.pos
+    pos.x, pos.y, _ = self.transform:GetPosA()
+    
     local rad = self.v_move_dir_rad
     pos.x = pos.x + self.v_speed * math.cos(rad) * dt
     pos.y = pos.y + self.v_speed * math.sin(rad) * dt

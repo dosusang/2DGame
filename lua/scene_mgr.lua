@@ -11,7 +11,7 @@ local man_cfg = {
     name = "坦克",
     res_path = "Tank",
     speed = 4,
-
+    born_pos = {x = -3, y = -38},
     gun = {
         lock_gun = false,
         keycode = KeyCode.Space,
@@ -19,7 +19,8 @@ local man_cfg = {
         speed = 10,
         shoot_cd = 0.01,
         live_time = 1,
-        path = "MissileArrow"
+        path = "MissileArrow",
+        auto_shot = false,
     }
 }
 
@@ -36,11 +37,12 @@ local base_gun_cfg = {
     gun = {
         lock_gun = false,
         keycode = KeyCode.Space,
-        max = 20,
+        max = 100,
         speed = 10,
         shoot_cd = 0.01,
         live_time = 1,
-        path = "MissileArrow"
+        path = "MissileArrow",
+        auto_shot = true,
     }
 }
 
@@ -86,7 +88,6 @@ end
 
 function M:game_start()
     Global.hero = self:create_hero()
-    Global.hero:set_pos(0, 0)
     self.scene_cam = require("camera"):new()
 
     self.tanks = {}

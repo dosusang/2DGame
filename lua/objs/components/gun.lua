@@ -19,6 +19,7 @@ function M:_init(entity, gun_cfg)
     self.v_max_count = gun_cfg.max or 3
     self.v_shoot_cd = gun_cfg.shoot_cd or 0.05
     self.just_shot = false
+    self.auto_shot = gun_cfg.auto_shot
 
     self.v_last_shoot_time = 0
 
@@ -38,7 +39,14 @@ function M:_init(entity, gun_cfg)
 end
 
 function M:get_input()
-    if (self.just_shot or Input.GetKey(self.key)) and TIME.time - self.v_last_shoot_time > self.v_shoot_cd then
+    local need_shot = false
+    if self.auto_shot then
+        need_shot = self.just_shot
+    else
+        need_shot = Input.GetKey(self.key)
+    end
+
+    if need_shot and TIME.time - self.v_last_shoot_time > self.v_shoot_cd then
         self:shoot()
     end
 end

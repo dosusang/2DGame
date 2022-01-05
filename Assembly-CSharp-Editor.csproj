@@ -375,6 +375,15 @@
  <Reference Include="UnityEditor.Android.Extensions">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.33f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll</HintPath>
  </Reference>
+ <Reference Include="Miku.Cecil">
+ <HintPath>C:/LXBProjs/2DGame/2DGame/Assets/LuaProfiler/Editor/CECIL/Miku.Cecil.dll</HintPath>
+ </Reference>
+ <Reference Include="EasyHook">
+ <HintPath>C:/LXBProjs/2DGame/2DGame/Assets/LuaProfiler/Plugins/EasyHook.dll</HintPath>
+ </Reference>
+ <Reference Include="MikuBinary">
+ <HintPath>C:/LXBProjs/2DGame/2DGame/Assets/LuaProfiler/Plugins/MikuBinary.dll</HintPath>
+ </Reference>
  <Reference Include="log4netPlastic">
  <HintPath>C:/LXBProjs/2DGame/2DGame/Library/PackageCache/com.unity.collab-proxy@1.14.1/Lib/Editor/PlasticSCM/log4netPlastic.dll</HintPath>
  </Reference>
@@ -386,15 +395,6 @@
  </Reference>
  <Reference Include="unityplastic">
  <HintPath>C:/LXBProjs/2DGame/2DGame/Library/PackageCache/com.unity.collab-proxy@1.14.1/Lib/Editor/PlasticSCM/unityplastic.dll</HintPath>
- </Reference>
- <Reference Include="Miku.Cecil">
- <HintPath>C:/LXBProjs/2DGame/2DGame/Assets/LuaProfiler/Editor/CECIL/Miku.Cecil.dll</HintPath>
- </Reference>
- <Reference Include="EasyHook">
- <HintPath>C:/LXBProjs/2DGame/2DGame/Assets/LuaProfiler/Plugins/EasyHook.dll</HintPath>
- </Reference>
- <Reference Include="MikuBinary">
- <HintPath>C:/LXBProjs/2DGame/2DGame/Assets/LuaProfiler/Plugins/MikuBinary.dll</HintPath>
  </Reference>
  <Reference Include="nunit.framework">
  <HintPath>C:/LXBProjs/2DGame/2DGame/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom/nunit.framework.dll</HintPath>
