@@ -10,3 +10,4 @@ public class CharUtil : MonoBehaviour
         GameMgr.Instance.GameMain.OnCollide(gameObject.GetInstanceID(), other.gameObject.GetInstanceID());
     }
 }
+

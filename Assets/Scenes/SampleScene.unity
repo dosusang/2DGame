@@ -23579,7 +23579,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 3.8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -24876,7 +24876,7 @@ GameObject:
   - component: {fileID: 1358556991}
   - component: {fileID: 1358556992}
   m_Layer: 0
-  m_Name: "\u5730\u56FE\u78B0\u649E"
+  m_Name: WallCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

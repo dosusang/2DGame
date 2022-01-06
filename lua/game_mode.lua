@@ -13,6 +13,7 @@ M.fixed_update = function()
 end
 
 M.on_collide = function (a, b)
+    Log.Info("on_collide",a, b)
     SceneMgr:on_collide(a, b)
 end
 

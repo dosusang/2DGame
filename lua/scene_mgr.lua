@@ -37,7 +37,7 @@ local base_gun_cfg = {
     gun = {
         lock_gun = false,
         keycode = KeyCode.Space,
-        max = 100,
+        max = 1,
         speed = 10,
         shoot_cd = 0.01,
         live_time = 1,
@@ -60,6 +60,11 @@ end
 
 function M:create_base_gun()
     return require("objs.entitys.base_gun"):new(base_gun_cfg)
+end
+
+function M:create_wall()
+    self.wall = UnityGameObject.Find("WallCollider")
+    self.wall_cid = self.wall:GetInstanceID()
 end
 
 function M:load_obj(path, luaobj)
@@ -89,6 +94,9 @@ end
 function M:game_start()
     Global.hero = self:create_hero()
     self.scene_cam = require("camera"):new()
+
+    --create_wall
+    self:create_wall()
 
     -- create BaseGuns
     self.tanks = {}
@@ -138,7 +146,12 @@ function M:on_collide(a_cid, b_cid)
     local missile = self.cid2obj[a_cid]
 
     if not missile or not missile.is_missile then return end
-
+    if b_cid == self.wall_cid then
+        if missile.on_collide_wall then
+            missile:on_collide_wall()
+        end
+    end
+    
     local other = self.cid2obj[b_cid]
     if not other then return end
 

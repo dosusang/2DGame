@@ -29,7 +29,7 @@ function M:_init(entity, gun_cfg)
         speed = gun_cfg.speed or 6,
         lock_dir = gun_cfg.lock_gun,
         max_live_time = 1,
-        move_type = 2
+        move_type = 1
     }
 
     self.v_missiles = {}
