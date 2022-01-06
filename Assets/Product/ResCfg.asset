@@ -20,8 +20,8 @@ MonoBehaviour:
     - Missile.prefab
     - BaseGun.prefab
     valueData:
-    - Assets/Product/Prefab/House.prefab
-    - Assets/Product/Prefab/MissileArrow.prefab
+    - Assets/Product/Prefab/Entitys/House.prefab
+    - Assets/Product/Prefab/Entitys/MissileArrow.prefab
     - Assets/Product/Prefab/Entitys/Tank.prefab
-    - Assets/Product/Prefab/Missile.prefab
-    - Assets/Product/Prefab/BaseGun.prefab
+    - Assets/Product/Prefab/Entitys/Missile.prefab
+    - Assets/Product/Prefab/Entitys/BaseGun.prefab

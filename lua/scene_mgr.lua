@@ -90,15 +90,29 @@ function M:game_start()
     Global.hero = self:create_hero()
     self.scene_cam = require("camera"):new()
 
+    -- create BaseGuns
     self.tanks = {}
     local base_gun_root = UnityGameObject.Find("BaseGuns")
     local length = base_gun_root.transform.childCount
+
     for i = 0, length-1 do
         local gun = self:create_base_gun()
         local pos = base_gun_root.transform:GetChild(i).position
         gun:set_pos(pos.x, pos.y)
         UnityGameObject.Destroy(base_gun_root.transform:GetChild(i).gameObject) 
         self.tanks[i] = gun
+    end
+
+    -- create Houses
+
+    local house_root = UnityGameObject.Find("Houses")
+    length = house_root.transform.childCount
+
+    for i = 0, length-1 do
+        local house = self:create_house()
+        local pos = house_root.transform:GetChild(i).position
+        house:set_pos(pos.x, pos.y)
+        UnityGameObject.Destroy(base_gun_root.transform:GetChild(i).gameObject) 
     end
 end
 
@@ -107,14 +121,11 @@ function M:clear()
     Global.hero = nil
 end
 
-local CD = 0.1
-local timer = 0
-
 function M:update()
     local dt = TIME.deltaTime
     Global.hero:on_update(dt)
     self.scene_cam:on_update(dt)
-    for i = 1, #self.tanks do
+    for i = 0, #self.tanks do
         self.tanks[i]:on_update(dt)
     end
 end
