@@ -7,10 +7,10 @@ local tank_cfg = {
     dirs = 4,
 }
 
-local man_cfg = {
+local hero_cfg = {
     name = "坦克",
     res_path = "Tank",
-    speed = 4,
+    speed = 3,
     born_pos = {x = -3, y = -38},
     gun = {
         lock_gun = false,
@@ -38,16 +38,16 @@ local base_gun_cfg = {
         lock_gun = false,
         keycode = KeyCode.Space,
         max = 1,
-        speed = 10,
+        speed = 2.5,
         shoot_cd = 2,
-        live_time = 1,
+        live_time = 2,
         path = "Missile",
         auto_shot = true,
     }
 }
 
 function M:create_hero()
-    return require("objs.entitys.basic_move&shot"):new(man_cfg)
+    return require("objs.entitys.basic_move&shot"):new(hero_cfg)
 end
 
 function M:create_tank()
