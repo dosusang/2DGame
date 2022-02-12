@@ -33,20 +33,21 @@ local MISSILE_ON_UPDATE = {
             pos.y = pos.y + missile.v_missile_speed * dt * params.move_y
             pos.x = pos.x + missile.v_missile_speed * dt * params.move_x
         end
-        CompExtention.SetPosA(missile.transform, pos.x, pos.y, pos.z)
+        missile:set_pos(pos.x, pos.y)
     end,
 
     [MISSILE_MOVE_TYPE.BEZIER] = function (missile, dt)
         local params = missile.move_params
         local pos = missile.pos
         pos.x, pos.y = Util.bezier(params.x0, params.y0, params.x1, params.y1, params.x2, params.y2, missile.live_time / missile.max_live_time)
-        CompExtention.SetPosA(missile.transform, pos.x, pos.y, pos.z)
+        missile:set_pos(pos.x, pos.y)
     end
 }
 
 function M:_init(cfg, shoter)
     Base._init(self, cfg)
     self.transform = self.gameobj.transform
+    self:set_pos(0, 0)
     self.pos.z = self.pos.z - 1
     
     local collide2d = self.gameobj:GetComponent(typeof(UnityCollider2D))
@@ -63,7 +64,11 @@ end
 function M:on_shot()
     self.gameobj:SetActive(true)
     local pos = self.shoter.pos
+<<<<<<< HEAD
     self:set_pos( pos.x, pos.y)
+=======
+    self:set_pos(pos.x, pos.y)
+>>>>>>> 5ac97a4d3f4f2c18e1edae2bdefddf93e3b33849
     CompExtention.SetEulerZ(self.transform, self.shoter:get_face_deg())
     self.live_time = 0
     self.shouted = true
@@ -107,6 +112,10 @@ function M:attack(obj)
             obj:on_beattack()
         end
     end
+end
+
+function M:on_collide_wall()
+    self:stop()
 end
 
 return M
