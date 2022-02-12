@@ -58,17 +58,14 @@ function M:_init(cfg, shoter)
     self.move_type = cfg.move_type or MISSILE_MOVE_TYPE.LINE
     self.move_params = {}
     self.max_live_time = cfg.max_live_time or 1
+    
     self.v_missile_speed = cfg.speed
 end
 
 function M:on_shot()
     self.gameobj:SetActive(true)
     local pos = self.shoter.pos
-<<<<<<< HEAD
     self:set_pos( pos.x, pos.y)
-=======
-    self:set_pos(pos.x, pos.y)
->>>>>>> 5ac97a4d3f4f2c18e1edae2bdefddf93e3b33849
     CompExtention.SetEulerZ(self.transform, self.shoter:get_face_deg())
     self.live_time = 0
     self.shouted = true

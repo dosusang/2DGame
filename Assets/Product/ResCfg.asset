@@ -15,17 +15,17 @@ MonoBehaviour:
   ResMap:
     keyData:
     - House.prefab
-    - Man.prefab
-    - HeroCar.prefab
     - MissileArrow.prefab
-    - Tank.prefab
     - Missile.prefab
     - BaseGun.prefab
+    - Man.prefab
+    - HeroCar.prefab
+    - Tank.prefab
     valueData:
     - Assets/Product/Prefab/House.prefab
-    - Assets/Product/Prefab/Man.prefab
-    - Assets/Product/Prefab/HeroCar.prefab
     - Assets/Product/Prefab/MissileArrow.prefab
-    - Assets/Product/Prefab/Tank.prefab
     - Assets/Product/Prefab/Missile.prefab
     - Assets/Product/Prefab/BaseGun.prefab
+    - Assets/Product/Prefab/Man.prefab
+    - Assets/Product/Prefab/HeroCar.prefab
+    - Assets/Product/Prefab/Tank.prefab
