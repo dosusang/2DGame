@@ -22,7 +22,7 @@ function M:on_update(dt)
         self.gun.just_shot = false
         self.v_cur_rad = Util.lerp_rad(self.v_cur_rad, -HALF_PI, 0.1)
     end
-    
+
     self.v_cur_deg = deg2rad * self.v_cur_rad
     Util.set_eulerz(self.gun_obj, self.v_cur_deg + 90)
 end

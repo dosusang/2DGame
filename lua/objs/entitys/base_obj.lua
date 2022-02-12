@@ -13,7 +13,7 @@ function M:_init(obj_cfg)
     self.components = {}
     self.transform.position = {x = 0, y =  0, z = -1}
     self.posx, self.posy = 0, 0
-    self.pos = {}
+    self.pos = {x = 0, y = 0, z = 0}
     self.pos.z = -1
     self.is_destroyed = false
 

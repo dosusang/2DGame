@@ -37,11 +37,11 @@ local base_gun_cfg = {
     gun = {
         lock_gun = false,
         keycode = KeyCode.Space,
-        max = 100,
+        max = 1,
         speed = 10,
-        shoot_cd = 0.01,
+        shoot_cd = 2,
         live_time = 1,
-        path = "MissileArrow",
+        path = "Missile",
         auto_shot = true,
     }
 }

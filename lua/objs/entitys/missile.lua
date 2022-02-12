@@ -1,10 +1,7 @@
 local Base = require("objs.entitys.base_obj")
 local M = Util.extend_class(Base)
-
-local MISSILE_MOVE_TYPE = {
-    LINE = 1,
-    BEZIER = 2,
-}
+local Config = require("config")
+local MISSILE_MOVE_TYPE = Config.MISSILE_MOVE_TYPE
 
 local MISSILE_ON_SHOT = {
     [MISSILE_MOVE_TYPE.LINE] = function (missile)
@@ -57,7 +54,7 @@ function M:_init(cfg, shoter)
     self.gameobj:SetActive(false)
     self.transform:SetParent(shoter.transform)
     self.shoter = shoter
-    self.move_type = cfg.move_type or 1
+    self.move_type = cfg.move_type or MISSILE_MOVE_TYPE.LINE
     self.move_params = {}
     self.max_live_time = cfg.max_live_time or 1
     self.v_missile_speed = cfg.speed
@@ -66,7 +63,7 @@ end
 function M:on_shot()
     self.gameobj:SetActive(true)
     local pos = self.shoter.pos
-    CompExtention.SetPosA(self.transform, pos.x, pos.y, pos.z - 1)
+    self:set_pos( pos.x, pos.y)
     CompExtention.SetEulerZ(self.transform, self.shoter:get_face_deg())
     self.live_time = 0
     self.shouted = true
